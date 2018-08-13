@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>already dead</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="favicon.png"/>
+  <style>
+    @font-face {
+      font-family: 'Gotham';
+      font-style: normal;
+      src:
+        local('Gotham'),
+        local('Gotham Regular'),
+        url('gotham.otf') format('opentype');
+    }
+
+    body {
+      margin: 0px;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+    }
+
+    @keyframes expand {
+      from { width: 300px; }
+      to   { width: 500px; }
+    }
+
+    div {
+      animation: expand 16s;
+      animation-fill-mode: both;
+    }
+
+    p {
+      margin: 0px;
+      font-family: 'Gotham', monospace;
+      font-size: 20pt;
+      line-height: 1.5;
+      transition: opacity 8s, letter-spacing 8s;
+    }
+  </style>
+</head>
+
+<body>
+</body>
+
+<script>
+  var blessing = 'blessed art thou o lord who has not made me a woman';
+
+  var div = document.createElement('div');
+  document.body.appendChild(div);
+
+  blessing.split(' ').forEach((word, i) => {
+    var p = document.createElement('p');
+    div.appendChild(p);
+    p.innerHTML = word;
+
+    if (i % 2 == 0) {
+      p.style.textAlign = 'right';
+    } else {
+      p.style.textAlign = 'left';
+    };
+
+    var r = 255;
+    var g = 0;
+    var b = linlin(i, 0, blessing.split(' ').length - 1, 255, 0);
+
+    p.style.color = 'rgb(' + [r, g, b].join(', ') + ')';
+    p.style.opacity = 0;
+    p.style.letterSpacing = '30px';
+
+    setTimeout(() => {
+      p.style.opacity = 1;
+      p.style.letterSpacing = '10px';
+    }, 800 * i);
+  });
+
+  function linlin(value, inMin, inMax, outMin, outMax) {
+    return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+  }
+</script>
+
+</html>
