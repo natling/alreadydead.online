@@ -49,25 +49,25 @@
 </body>
 
 <script>
-  var blessing = 'blessed art thou o lord who has not made me a woman';
+  const blessing = 'blessed art thou o lord who has not made me a woman';
 
-  var div = document.createElement('div');
+  const linlin = (value, inMin, inMax, outMin, outMax) => {
+    return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
+  }
+
+  const div = document.createElement('div');
   document.body.appendChild(div);
 
   blessing.split(' ').forEach((word, i) => {
-    var p = document.createElement('p');
+    const p = document.createElement('p');
     div.appendChild(p);
     p.innerHTML = word;
 
-    if (i % 2 == 0) {
-      p.style.textAlign = 'right';
-    } else {
-      p.style.textAlign = 'left';
-    };
+    p.style.textAlign = i % 2 == 0 ? 'right' : 'left';
 
-    var r = 255;
-    var g = 0;
-    var b = linlin(i, 0, blessing.split(' ').length - 1, 255, 0);
+    const r = 255;
+    const g = 0;
+    const b = linlin(i, 0, blessing.split(' ').length - 1, 255, 0);
 
     p.style.color = 'rgb(' + [r, g, b].join(', ') + ')';
     p.style.opacity = 0;
@@ -78,10 +78,6 @@
       p.style.letterSpacing = '10px';
     }, 800 * i);
   });
-
-  function linlin(value, inMin, inMax, outMin, outMax) {
-    return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);
-  }
 </script>
 
 </html>
